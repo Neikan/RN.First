@@ -1,21 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { ReactElement, useState } from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
-export default function App() {
+import { AddTodo } from './src/common/AddTodo'
+import { Navbar } from './src/common/Navbar'
+import { Todo } from './src/common/Todo'
+
+import { ITodo } from './src/common/Todo/types'
+
+export default function App(): ReactElement {
+  const [todos, setTodos] = useState<ITodo[]>([])
+
+  const addTodo = (title: string): void => {
+    setTodos(prev => [
+      ...prev,
+      {
+        id: Date.now().toString(),
+        title
+      }
+    ])
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.app}>
+      <Navbar title='Todo App' />
+
+      <View style={styles.todos}>
+        <AddTodo onSubmit={addTodo} />
+        <ScrollView>
+          {todos.map(todo => <Todo key={todo.id} todo={todo} />)}
+        </ScrollView>
+      </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  app: {},
+  todos: {
+    paddingHorizontal: 16,
+    paddingVertical: 16
   },
-});
+})
