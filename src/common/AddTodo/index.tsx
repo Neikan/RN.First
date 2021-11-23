@@ -41,6 +41,8 @@ export const AddTodo: FC<IProps> = ({ onSubmit }) => {
         style={styles.input}
         value={value}
         selectionColor={Color.MAIN}
+        autoCorrect={false}
+        autoCapitalize='none'
       />
       <Button color={Color.MAIN} title='Добавить' onPress={handlePress} />
     </View>
