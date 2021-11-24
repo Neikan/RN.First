@@ -5,4 +5,6 @@ export interface ITodo {
 
 export interface ITodoProps {
   todo: ITodo
+  onOpen: (id: string) => void
+  onRemove: (id: string) => void
 }
