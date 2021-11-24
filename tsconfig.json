@@ -12,15 +12,16 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
-      "components/*": ["./components/*"],
-      "components": ["./components"],
-      "consts/*": ["./consts/*"],
-      "consts": ["./consts"],
-      "screens/*": ["./screens/*"],
-      "screens": ["./screens"],
-      "types":  ["./types"],
+      "~/components/*": ["./components/*"],
+      "~/components": ["./components"],
+      "~/consts/*": ["./consts/*"],
+      "~/consts": ["./consts"],
+      "~/screens/*": ["./screens/*"],
+      "~/screens": ["./screens"],
+      "~/types":  ["./types"],
     }
-  }
+  },
+  "exclude": [ "node_modules" ],
 }
