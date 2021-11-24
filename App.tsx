@@ -1,11 +1,12 @@
 import React, { ReactElement, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { MainScreen, TodoScreen } from 'screens'
+import { Header } from '~/components/Header'
+import { MainScreen } from '~/screens/MainScreen'
+import { TodoScreen } from '~/screens/TodoScreen'
 
-import { Nullable } from 'types'
-import { ITodo } from 'components/Todo/types'
-import { Header } from 'components/Header'
+import { Nullable } from '~/types'
+import { ITodo } from '~/components/Todo/types'
 
 export default function App (): ReactElement {
   const [todoId, setTodoId] = useState<Nullable<string>>('2')
