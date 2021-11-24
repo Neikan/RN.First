@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomColor: DefaultTheme.BRAND_500,
     borderBottomWidth: 2,
-    padding: 10
+    padding: 16
   }
 })
 
