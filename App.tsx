@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Alert, StyleSheet, View } from 'react-native'
 
 import { Header } from '@/components/Header'
 import { MainScreen } from '@/screens/MainScreen'
@@ -30,7 +30,37 @@ export default function App (): ReactElement {
   }
 
   const removeTodo = (todoId: string): void => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== todoId))
+    const todoTitle: string = todos.find(todo => todo.id === todoId)?.title ?? ''
+
+    todoTitle && Alert.alert(
+      'Удаление элемента',
+      `Вы уверены, что хотите удалить ${todoTitle}?`,
+      [
+        {
+          text: 'Отмена',
+          style: 'cancel'
+        },
+        {
+          text: 'Подтвердить',
+          onPress: () => {
+            setTodoId(null)
+            setTodos((prev) => prev.filter((todo) => todo.id !== todoId))
+          }
+        }
+      ],
+      { cancelable: true }
+    )
+  }
+
+  const editTodo = (id: string, title: string): void => {
+    setTodos(prev => prev.map((todo) => {
+        if (todo.id === id) {
+          todo.title = title
+        }
+
+        return todo
+      })
+    )
   }
 
   const goBack = (): void => setTodoId(null)
@@ -41,7 +71,7 @@ export default function App (): ReactElement {
     const selectedTodo = todos.find((todo) => todo.id === todoId)
 
     if (selectedTodo) {
-      content = <TodoScreen onGoBack={goBack} todo={selectedTodo} />
+      content = <TodoScreen onGoBack={goBack} onRemoveTodo={removeTodo} todo={selectedTodo} onEditTodo={editTodo} />
     }
   }
 
@@ -57,7 +87,6 @@ export default function App (): ReactElement {
 const styles = StyleSheet.create({
   screen: {
     height: 700,
-    paddingHorizontal: 16,
-    paddingVertical: 16
+    padding: 16
   }
 })
