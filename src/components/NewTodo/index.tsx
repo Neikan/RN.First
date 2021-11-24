@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { Alert, Button, StyleSheet, TextInput, View } from 'react-native'
 
-import { DefaultTheme } from 'consts/theme'
+import { DefaultTheme } from '~/consts/theme'
 
 import { INewTodoProps as IProps } from './types'
 
