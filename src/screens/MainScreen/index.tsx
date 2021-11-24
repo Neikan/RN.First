@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 
-import { NewTodo } from '~/components/NewTodo'
-import { Todo } from '~/components/Todo'
+import { NewTodo } from '@/components/NewTodo'
+import { Todo } from '@/components/Todo'
 
 import { IMainScreenProps as IProps } from './types'
 

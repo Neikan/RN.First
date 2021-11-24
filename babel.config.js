@@ -5,7 +5,7 @@ module.exports = function(api) {
     paths: [
       {
         root: __dirname,
-        rootPathPrefix: '~/',
+        rootPathPrefix: '@/',
         rootPathSuffix: 'src',
       }
     ]

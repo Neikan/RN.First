@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 
-import { DefaultTheme } from '~/consts/theme'
+import { DefaultTheme } from '@/consts/theme'
 
 import { ITodoScreenProps as IProps } from './types'
 
