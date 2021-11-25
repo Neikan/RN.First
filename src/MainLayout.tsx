@@ -12,12 +12,7 @@ import { TodoScreen } from '@/screens/TodoScreen'
 import { Nullable } from '@/types'
 
 export const MainLayout: FC = () => {
-  const {
-    todos,
-    addTodo,
-    removeTodo,
-    updateTodo
-  } = useContext(TodoContext)
+  const { todos, addTodo, removeTodo, updateTodo } = useContext(TodoContext)
 
   const [todoId, setTodoId] = useState<Nullable<string>>(null)
 
@@ -48,9 +43,7 @@ export const MainLayout: FC = () => {
 
   const goBack = (): void => setTodoId(null)
 
-  let content = (
-    <MainScreen onAddTodo={addTodo} onOpenTodo={openTodo} onRemoveTodo={removeTodo} todos={todos} />
-  )
+  let content = <MainScreen onAddTodo={addTodo} onOpenTodo={openTodo} onRemoveTodo={removeTodo} todos={todos} />
 
   if (todoId) {
     const selectedTodo = todos.find((todo) => todo.id === todoId)
