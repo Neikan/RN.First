@@ -5,6 +5,7 @@ import { NewTodo } from '@/components/NewTodo'
 import { Todo } from '@/components/Todo'
 
 import { IMainScreenProps as IProps } from './types'
+import { EmptyList } from '@/components/EmptyList'
 
 const styles = StyleSheet.create({
   screen: {}
@@ -14,12 +15,12 @@ export const MainScreen: FC<IProps> = ({ onAddTodo, onOpenTodo, onRemoveTodo, to
   return (
     <View style={styles.screen}>
       <NewTodo onSubmit={onAddTodo} />
-      <FlatList
+      {todos.length ? <FlatList
         scrollsToTop
         keyExtractor={(item) => item.id}
         data={todos}
         renderItem={({ item }) => <Todo key={item.id} onOpen={onOpenTodo} onRemove={onRemoveTodo} todo={item} />}
-      />
+      /> : <EmptyList />}
     </View>
   )
 }
