@@ -7,7 +7,7 @@ import { TodoScreen } from '@/screens/TodoScreen'
 
 import { Nullable } from '@/types'
 import { ITodo } from '@/components/Todo/types'
-import { DefaultTheme } from '@/consts/theme'
+import { DefaultTheme, Spacing } from '@/consts/theme'
 
 export default function App (): ReactElement {
   const [todoId, setTodoId] = useState<Nullable<string>>(null)
@@ -84,8 +84,8 @@ export default function App (): ReactElement {
 
 const styles = StyleSheet.create({
   screen: {
-    height: 700,
-    padding: 16
+    paddingHorizontal: Spacing.PADDING_X,
+    paddingVertical: Spacing.PADDING_Y
   },
   buttons: {
     color: DefaultTheme.BRAND_500
