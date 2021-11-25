@@ -59,10 +59,10 @@ export const EditTodo: FC<IProps> = ({ isVisible, todoTitle, onCancel, onSave })
 
         <View style={styles.buttons}>
           <View style={styles.button}>
-            <Button color={DefaultTheme.GRAY_500} title='Отменить' onPress={onCancel} />
+            <Button color={DefaultTheme.BRAND_500} title='Сохранить' onPress={handlePress} />
           </View>
           <View style={styles.button}>
-            <Button color={DefaultTheme.BRAND_500} title='Сохранить' onPress={handlePress} />
+            <Button color={DefaultTheme.GRAY_500} title='Отменить' onPress={onCancel} />
           </View>
         </View>
       </View>
