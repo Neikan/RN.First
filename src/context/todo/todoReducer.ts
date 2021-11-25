@@ -1,5 +1,4 @@
-import { TodoActionTypes } from '@/screens/TodoScreen/types'
-import { ITodoState as IState } from './TodoState/types'
+import { ITodoState as IState, TodoActionTypes } from './TodoState/types'
 
 export const todoReducer = (state: IState, action: any): IState => {
   switch (action.type) {

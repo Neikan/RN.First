@@ -2,6 +2,12 @@ import { ReactNode } from 'react'
 
 import { ITodo } from '@/components/Todo/types'
 
+export enum TodoActionTypes {
+  ADD_TODO = 'ADD_TODO',
+  REMOVE_TODO = 'REMOVE_TODO',
+  UPDATE_TODO = 'UPDATE_TODO'
+}
+
 export interface ITodoStateProps {
   children: ReactNode
 }

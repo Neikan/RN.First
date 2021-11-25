@@ -3,8 +3,7 @@ import React, { FC, useReducer } from 'react'
 import { todoReducer } from '../todoReducer'
 import { TodoContext } from '../todoContext'
 
-import { ITodoState as IState, ITodoStateProps as IProps } from './types'
-import { TodoActionTypes } from '@/screens/TodoScreen/types'
+import { ITodoState as IState, ITodoStateProps as IProps, TodoActionTypes } from './types'
 
 export const TodoState: FC<IProps> = ({ children }) => {
   const initialState: IState = {

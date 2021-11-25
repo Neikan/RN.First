@@ -7,4 +7,4 @@ export const TodoContext = createContext<IContext>({
   addTodo: () => null,
   removeTodo: () => null,
   updateTodo: () => null
- })
+})
