@@ -7,13 +7,11 @@ import { TodoScreen } from '@/screens/TodoScreen'
 
 import { Nullable } from '@/types'
 import { ITodo } from '@/components/Todo/types'
+import { DefaultTheme } from '@/consts/theme'
 
 export default function App (): ReactElement {
-  const [todoId, setTodoId] = useState<Nullable<string>>('2')
-  const [todos, setTodos] = useState<ITodo[]>([
-    { id: '1', title: 'Разработка' },
-    { id: '2', title: 'Тестирование' }
-  ])
+  const [todoId, setTodoId] = useState<Nullable<string>>(null)
+  const [todos, setTodos] = useState<ITodo[]>([])
 
   const addTodo = (title: string): void => {
     setTodos((prev) => [
@@ -37,15 +35,15 @@ export default function App (): ReactElement {
       `Вы уверены, что хотите удалить ${todoTitle}?`,
       [
         {
-          text: 'Отмена',
-          style: 'cancel'
-        },
-        {
           text: 'Подтвердить',
           onPress: () => {
             setTodoId(null)
             setTodos((prev) => prev.filter((todo) => todo.id !== todoId))
           }
+        },
+        {
+          text: 'Отмена',
+          style: 'cancel',
         }
       ],
       { cancelable: true }
@@ -88,5 +86,8 @@ const styles = StyleSheet.create({
   screen: {
     height: 700,
     padding: 16
+  },
+  buttons: {
+    color: DefaultTheme.BRAND_500
   }
 })
