@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons'
 
 import { DefaultTheme } from '@/consts/theme'
 
-import { AppButton } from '../AppButton'
+import { AppButton } from '@/components/AppButton'
 
 import { ITodoCardProps as IProps } from './types'
 
@@ -16,11 +16,13 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 3,
     marginBottom: 16,
+    // Тень для iOS
     shadowColor: DefaultTheme.BRAND_500,
     shadowRadius: 2,
     shadowOpacity: 0.5,
     shadowOffset: { width: 2, height: 2 },
     backgroundColor: DefaultTheme.LIGHT,
+    // Тень для android
     elevation: 8
   }
 })

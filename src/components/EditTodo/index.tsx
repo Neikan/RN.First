@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons'
 
 import { DefaultTheme } from '@/consts/theme'
 
-import { AppButton } from '../AppButton'
+import { AppButton } from '@/components/AppButton'
 
 import { IEditTodoProps as IProps } from './types'
 

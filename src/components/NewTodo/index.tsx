@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 import { DefaultTheme } from '@/consts/theme'
 
-import { AppButton } from '../AppButton'
+import { AppButton } from '@/components/AppButton'
 
 import { INewTodoProps as IProps } from './types'
 
@@ -55,9 +55,6 @@ export const NewTodo: FC<IProps> = ({ onSubmit }) => {
       >
         Добавить
       </AppButton>
-      {/* <AntDesign.Button onPress={handlePress} name='pluscircleo' backgroundColor={DefaultTheme.BRAND_500}>
-        Добавить
-      </AntDesign.Button> */}
     </View>
   )
 }
