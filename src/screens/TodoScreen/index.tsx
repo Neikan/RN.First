@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
+import { AntDesign, FontAwesome } from '@expo/vector-icons'
 
 import { DefaultTheme } from '@/consts/theme'
 
@@ -8,7 +9,6 @@ import { TodoCard } from '@/components/TodoCard'
 import { EditTodo } from '@/components/EditTodo'
 
 import { ITodoScreenProps as IProps } from './types'
-import { AntDesign, FontAwesome } from '@expo/vector-icons'
 
 const styles = StyleSheet.create({
   screen: {
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   button: {
-    // width: Dimensions.get('window').width / 3
-    width: Dimensions.get('window').width > 400 ? 150 : 100
+    width: Dimensions.get('window').width / 3
+    // width: Dimensions.get('window').width > 400 ? 150 : 100
   }
 })
 
