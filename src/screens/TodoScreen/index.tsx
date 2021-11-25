@@ -1,12 +1,14 @@
 import React, { FC, useState } from 'react'
-import { Button, StyleSheet, View } from 'react-native'
+import { Dimensions, StyleSheet, View } from 'react-native'
 
 import { DefaultTheme } from '@/consts/theme'
 
+import { AppButton } from '@/components/AppButton'
 import { TodoCard } from '@/components/TodoCard'
+import { EditTodo } from '@/components/EditTodo'
 
 import { ITodoScreenProps as IProps } from './types'
-import { EditTodo } from '@/components/EditTodo'
+import { AntDesign, FontAwesome } from '@expo/vector-icons'
 
 const styles = StyleSheet.create({
   screen: {
@@ -19,7 +21,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   button: {
-    width: '40%'
+    // width: Dimensions.get('window').width / 3
+    width: Dimensions.get('window').width > 400 ? 150 : 100
   }
 })
 
@@ -38,10 +41,14 @@ export const TodoScreen: FC<IProps> = ({ onEditTodo, onGoBack, onRemoveTodo, tod
 
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button title='Назад' onPress={onGoBack} color={DefaultTheme.GRAY_500} />
+          <AppButton onPress={onGoBack} backgroundColor={DefaultTheme.GRAY_500}>
+            <AntDesign name='back' size={24} />
+          </AppButton>
         </View>
         <View style={styles.button}>
-          <Button title='Удалить' onPress={() => onRemoveTodo(todo.id)} color={DefaultTheme.DANGER_500} />
+          <AppButton onPress={() => onRemoveTodo(todo.id)} backgroundColor={DefaultTheme.DANGER_500}>
+            <FontAwesome name='remove' size={24} />
+          </AppButton>
         </View>
       </View>
     </View>
