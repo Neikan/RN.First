@@ -18,6 +18,8 @@
       "@/components": ["./components"],
       "@/consts/*": ["./consts/*"],
       "@/consts": ["./consts"],
+      "@/context/*": ["./context/*"],
+      "@/context": ["./context"],
       "@/screens/*": ["./screens/*"],
       "@/screens": ["./screens"],
       "@/types":  ["./types"],
