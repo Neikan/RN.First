@@ -1,7 +1,10 @@
 import React, { FC } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
 
 import { DefaultTheme } from '@/consts/theme'
+
+import { AppButton } from '../AppButton'
 
 import { ITodoCardProps as IProps } from './types'
 
@@ -22,11 +25,11 @@ const styles = StyleSheet.create({
   }
 })
 
-export const TodoCard: FC<IProps> = ({ onEdit, todo }) => {
-  return (
-    <View style={styles.todoCard}>
-      <Text>{todo.title}</Text>
-      <Button color={DefaultTheme.BRAND_500} title='Редактировать' onPress={onEdit} />
-    </View>
-  )
-}
+export const TodoCard: FC<IProps> = ({ onEdit, todo }) => (
+  <View style={styles.todoCard}>
+    <Text>{todo.title}</Text>
+    <AppButton onPress={onEdit} backgroundColor={DefaultTheme.BRAND_500}>
+      <FontAwesome name='edit' size={24} />
+    </AppButton>
+  </View>
+)
