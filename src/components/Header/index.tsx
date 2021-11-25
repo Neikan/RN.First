@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View } from 'react-native'
 
 import { DefaultTheme } from '@/consts/theme'
 
@@ -10,17 +10,31 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    backgroundColor: DefaultTheme.BRAND_500,
     paddingBottom: 10
   },
+  viewAndroid: {
+    backgroundColor: DefaultTheme.BRAND_500
+  },
+  viewIOS: {
+    borderBottomColor: DefaultTheme.BRAND_500,
+    borderBottomWidth: 1
+  },
   text: {
-    color: DefaultTheme.LIGHT,
+    color: Platform.OS === 'ios' ? DefaultTheme.BRAND_500 : DefaultTheme.LIGHT,
     fontSize: 20
   }
 })
 
 export const Header: FC<IProps> = ({ title }) => (
-  <View style={styles.view}>
+  <View
+    style={{
+      ...styles.view,
+      ...Platform.select({
+        ios: { ...styles.viewIOS },
+        android: { ...styles.viewAndroid }
+      })
+    }}
+  >
     <Text style={styles.text}>{title}</Text>
   </View>
 )
