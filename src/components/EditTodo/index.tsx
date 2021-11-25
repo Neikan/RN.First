@@ -1,7 +1,10 @@
 import React, { FC, useState } from 'react'
-import { Alert, Button, Modal, StyleSheet, TextInput, View } from 'react-native'
+import { Alert, Modal, StyleSheet, TextInput, View } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
 
 import { DefaultTheme } from '@/consts/theme'
+
+import { AppButton } from '../AppButton'
 
 import { IEditTodoProps as IProps } from './types'
 
@@ -21,7 +24,7 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 16,
+    margin: 16
   },
   button: {
     width: '40%'
@@ -41,10 +44,7 @@ export const EditTodo: FC<IProps> = ({ isVisible, todoTitle, onCancel, onSave })
   }
 
   return (
-    <Modal
-      visible={isVisible}
-      animationType='slide'
-    >
+    <Modal visible={isVisible} animationType='slide'>
       <View style={styles.view}>
         <TextInput
           autoFocus
@@ -59,10 +59,15 @@ export const EditTodo: FC<IProps> = ({ isVisible, todoTitle, onCancel, onSave })
 
         <View style={styles.buttons}>
           <View style={styles.button}>
-            <Button color={DefaultTheme.BRAND_500} title='Сохранить' onPress={handlePress} />
+            <AppButton onPress={handlePress} backgroundColor={DefaultTheme.BRAND_500}>
+              <FontAwesome name='save' size={24} />
+            </AppButton>
           </View>
+
           <View style={styles.button}>
-            <Button color={DefaultTheme.GRAY_500} title='Отменить' onPress={onCancel} />
+            <AppButton onPress={onCancel} backgroundColor={DefaultTheme.GRAY_500}>
+              <FontAwesome name='remove' size={24} />
+            </AppButton>
           </View>
         </View>
       </View>
