@@ -1,7 +1,10 @@
 import React, { FC, useState } from 'react'
-import { Alert, Button, StyleSheet, TextInput, View } from 'react-native'
+import { Alert, Keyboard, StyleSheet, TextInput, View } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 
 import { DefaultTheme } from '@/consts/theme'
+
+import { AppButton } from '../AppButton'
 
 import { INewTodoProps as IProps } from './types'
 
@@ -13,7 +16,7 @@ const styles = StyleSheet.create({
     marginBottom: 16
   },
   input: {
-    width: '70%',
+    width: '60%',
     borderStyle: 'solid',
     borderBottomColor: DefaultTheme.BRAND_500,
     borderBottomWidth: 2,
@@ -28,6 +31,7 @@ export const NewTodo: FC<IProps> = ({ onSubmit }) => {
     if (value.trim()) {
       onSubmit(value)
       setValue('')
+      Keyboard.dismiss()
     } else {
       Alert.alert('Название задачи может быть пустым')
     }
@@ -44,7 +48,16 @@ export const NewTodo: FC<IProps> = ({ onSubmit }) => {
         autoCorrect={false}
         autoCapitalize='none'
       />
-      <Button color={DefaultTheme.BRAND_500} title='Добавить' onPress={handlePress} />
+      <AppButton
+        onPress={handlePress}
+        backgroundColor={DefaultTheme.BRAND_500}
+        leftIcon={<AntDesign name='pluscircleo' size={24} color={DefaultTheme.LIGHT} />}
+      >
+        Добавить
+      </AppButton>
+      {/* <AntDesign.Button onPress={handlePress} name='pluscircleo' backgroundColor={DefaultTheme.BRAND_500}>
+        Добавить
+      </AntDesign.Button> */}
     </View>
   )
 }
