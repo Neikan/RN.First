@@ -1,5 +1,8 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native'
+
+import { TodoContext } from '@/context/todo/todoContext'
+import { ScreenContext } from '@/context/screen/screenContext'
 
 import { Spacing } from '@/consts/theme'
 
@@ -7,13 +10,14 @@ import { EmptyList } from '@/components/EmptyList'
 import { NewTodo } from '@/components/NewTodo'
 import { Todo } from '@/components/Todo'
 
-import { IMainScreenProps as IProps } from './types'
-
 const styles = StyleSheet.create({
   screen: {}
 })
 
-export const MainScreen: FC<IProps> = ({ onAddTodo, onOpenTodo, onRemoveTodo, todos }) => {
+export const MainScreen: FC = () => {
+  const { todos, addTodo, removeTodo } = useContext(TodoContext)
+  const { changeScreen } = useContext(ScreenContext)
+
   const [deviceWidth, setDeviceWidth] = useState(Dimensions.get('window').width - 2 * Spacing.PADDING_X)
 
   useEffect(() => {
@@ -32,14 +36,14 @@ export const MainScreen: FC<IProps> = ({ onAddTodo, onOpenTodo, onRemoveTodo, to
 
   return (
     <View style={styles.screen}>
-      <NewTodo onSubmit={onAddTodo} />
+      <NewTodo onSubmit={addTodo} />
       {todos.length ? (
         <View style={{ width: deviceWidth }}>
           <FlatList
             scrollsToTop
             keyExtractor={(item) => item.id}
             data={todos}
-            renderItem={({ item }) => <Todo key={item.id} onOpen={onOpenTodo} onRemove={onRemoveTodo} todo={item} />}
+            renderItem={({ item }) => <Todo key={item.id} onOpen={changeScreen} onRemove={removeTodo} todo={item} />}
           />
         </View>
       ) : (
