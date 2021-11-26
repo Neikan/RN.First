@@ -16,14 +16,25 @@ export interface ITodoState {
   todos: ITodo[]
 }
 
-export interface ITodoContext {
-  todos: ITodo[]
+export interface ITodoContext extends ITodoState {
   addTodo: (title: string) => void
   removeTodo: (id: string) => void
   updateTodo: (id: string, title: string) => void
 }
 
-export interface ITodoAction {
+export interface IAddTodoAction {
   type: TodoActionTypes
-  payload: string | ITodo
+  payload: string
 }
+
+export interface IRemoveTodoAction {
+  type: TodoActionTypes
+  payload: string
+}
+
+export interface IUpdateTodoAction {
+  type: TodoActionTypes
+  payload: ITodo
+}
+
+export type TTodoActions = IAddTodoAction | IRemoveTodoAction | IUpdateTodoAction

@@ -1,5 +1,5 @@
 import { ITodo } from '@/components/Todo/types'
-import { ITodoAction, ITodoState as IState, TodoActionTypes } from './TodoState/types'
+import { ITodoState as IState, TodoActionTypes, TTodoActions } from './TodoState/types'
 
 const handlers = {
   [TodoActionTypes.ADD_TODO]: (state: IState, title: string) => ({
@@ -32,7 +32,7 @@ const handlers = {
   DEFAULT: (state: IState) => state
 }
 
-export const todoReducer = (state: IState, { type, payload }: ITodoAction): IState => {
+export const todoReducer = (state: IState, { type, payload }: TTodoActions): IState => {
   const handler = handlers[type] ?? handlers.DEFAULT
 
   // избавиться от any
