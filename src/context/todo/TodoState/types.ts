@@ -22,3 +22,8 @@ export interface ITodoContext {
   removeTodo: (id: string) => void
   updateTodo: (id: string, title: string) => void
 }
+
+export interface ITodoAction {
+  type: TodoActionTypes
+  payload: string | ITodo
+}

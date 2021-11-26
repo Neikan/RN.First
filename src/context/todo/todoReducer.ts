@@ -1,38 +1,40 @@
-import { ITodoState as IState, TodoActionTypes } from './TodoState/types'
+import { ITodo } from '@/components/Todo/types'
+import { ITodoAction, ITodoState as IState, TodoActionTypes } from './TodoState/types'
 
-export const todoReducer = (state: IState, action: any): IState => {
-  switch (action.type) {
-    case TodoActionTypes.ADD_TODO:
-      return {
-        ...state,
-        todos: [
-          ...state.todos,
-          {
-            id: Date.now().toString(),
-            title: action.payload
-          }
-        ]
+const handlers = {
+  [TodoActionTypes.ADD_TODO]: (state: IState, title: string) => ({
+    ...state,
+    todos: [
+      ...state.todos,
+      {
+        id: Date.now().toString(),
+        title
+      }
+    ]
+  }),
+
+  [TodoActionTypes.REMOVE_TODO]: (state: IState, id: string) => ({
+    ...state,
+    todos: state.todos.filter((todo) => todo.id !== id)
+  }),
+
+  [TodoActionTypes.UPDATE_TODO]: (state: IState, { id, title }: ITodo) => ({
+    ...state,
+    todos: state.todos.map((todo) => {
+      if (todo.id === id) {
+        todo.title = title
       }
 
-    case TodoActionTypes.REMOVE_TODO:
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload)
-      }
+      return todo
+    })
+  }),
 
-    case TodoActionTypes.UPDATE_TODO:
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.payload.id) {
-            todo.title = action.payload.title
-          }
+  DEFAULT: (state: IState) => state
+}
 
-          return todo
-        })
-      }
+export const todoReducer = (state: IState, { type, payload }: ITodoAction): IState => {
+  const handler = handlers[type] ?? handlers.DEFAULT
 
-    default:
-      return state
-  }
+  // избавиться от any
+  return handler(state, payload as any)
 }
