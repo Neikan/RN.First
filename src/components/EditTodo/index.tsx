@@ -37,10 +37,14 @@ export const EditTodo: FC<IProps> = ({ isVisible, todoTitle, onCancel, onSave })
   const handlePress = (): void => {
     if (title.trim()) {
       onSave(title)
-      setTitle('')
     } else {
       Alert.alert('Название задачи может быть пустым')
     }
+  }
+
+  const handleCancel = (): void => {
+    setTitle(todoTitle)
+    onCancel()
   }
 
   return (
@@ -65,7 +69,7 @@ export const EditTodo: FC<IProps> = ({ isVisible, todoTitle, onCancel, onSave })
           </View>
 
           <View style={styles.button}>
-            <AppButton onPress={onCancel} backgroundColor={DefaultTheme.GRAY_500}>
+            <AppButton onPress={handleCancel} backgroundColor={DefaultTheme.GRAY_500}>
               <FontAwesome name='remove' size={24} />
             </AppButton>
           </View>
