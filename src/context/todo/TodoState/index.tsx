@@ -1,11 +1,13 @@
 import React, { FC, useContext, useReducer } from 'react'
 import { Alert } from 'react-native'
 
+import { Http } from '@/services/http'
+
+import { API } from '@/consts/common'
+
 import { ScreenContext } from '@/context/screen/screenContext'
 import { TodoContext } from '@/context/todo/todoContext'
 import { todoReducer } from '@/context/todo/todoReducer'
-
-import { API, Method } from '@/consts/common'
 
 import { ITodoState as IState, ITodoStateProps as IProps, TodoActionTypes } from './types'
 
@@ -21,21 +23,21 @@ export const TodoState: FC<IProps> = ({ children }) => {
   const [state, dispatch] = useReducer(todoReducer, initialState)
 
   const addTodo = async (title: string): Promise<void> => {
-    const response = await fetch(API + 'todos.json', {
-      method: Method.POST,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title })
-    })
+    clearError()
 
-    const { name } = await response.json()
+    try {
+      const data = await Http.post(API + 'todos.json', { title })
 
-    dispatch({
-      type: TodoActionTypes.ADD_TODO,
-      payload: {
-        id: name,
-        title
-      }
-    })
+      dispatch({
+        type: TodoActionTypes.ADD_TODO,
+        payload: {
+          id: data.name,
+          title
+        }
+      })
+    } catch (error) {
+      showError('Ошибка отправки данных...')
+    }
   }
 
   const removeTodo = (id: string): void => {
@@ -51,15 +53,16 @@ export const TodoState: FC<IProps> = ({ children }) => {
             onPress: async () => {
               changeScreen(null)
 
-              await fetch(API + `todos/${id}.json`, {
-                method: Method.DELETE,
-                headers: { 'Content-Type': 'application/json' }
-              })
+              try {
+                await Http.delete(API + `todos/${id}.json`)
 
-              dispatch({
-                type: TodoActionTypes.REMOVE_TODO,
-                payload: id
-              })
+                dispatch({
+                  type: TodoActionTypes.REMOVE_TODO,
+                  payload: id
+                })
+              } catch (error) {
+                showError('Ошибка удаления. Попробуйте позднее...')
+              }
             }
           },
           {
@@ -75,11 +78,7 @@ export const TodoState: FC<IProps> = ({ children }) => {
     clearError()
 
     try {
-      await fetch(API + `todos/${id}.json`, {
-        method: Method.PATCH,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title })
-      })
+      await Http.patch(API + `todos/${id}.json`, { title })
 
       dispatch({
         type: TodoActionTypes.UPDATE_TODO,
@@ -103,12 +102,7 @@ export const TodoState: FC<IProps> = ({ children }) => {
     clearError()
 
     try {
-      const response = await fetch(API + 'todos.json', {
-        method: Method.GET,
-        headers: { 'Content-Type': 'application/json' }
-      })
-
-      const data = await response.json()
+      const data = await Http.get(API + 'todos.json')
 
       const todos = Object.keys(data).map((key) => ({ ...data[key], id: key }))
 
