@@ -36,8 +36,8 @@ export const TodoScreen: FC = () => {
   if (selectedTodo) {
     const [isModal, setIsModal] = useState(false)
 
-    const handleSave = (title: string): void => {
-      updateTodo(selectedTodo.id, title)
+    const handleSave = async (title: string): Promise<void> => {
+      await updateTodo(selectedTodo.id, title)
       setIsModal(false)
     }
 
