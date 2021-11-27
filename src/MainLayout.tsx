@@ -13,7 +13,7 @@ export const MainLayout: FC = () => {
   const { todoId } = useContext(ScreenContext)
 
   return (
-    <View>
+    <View style={styles.wrapper}>
       <Header title='Todo App' />
 
       <View style={styles.screen}>{todoId ? <TodoScreen /> : <MainScreen />}</View>
@@ -23,8 +23,11 @@ export const MainLayout: FC = () => {
 
 const styles = StyleSheet.create({
   screen: {
-    height: 700,
+    flex: 1,
     paddingHorizontal: Spacing.PADDING_X,
     paddingVertical: Spacing.PADDING_Y
+  },
+  wrapper: {
+    flex: 1
   }
 })
