@@ -1,24 +1,34 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native'
+
+import { Spacing } from '@/consts/theme'
 
 import { TodoContext } from '@/context/todo/todoContext'
 import { ScreenContext } from '@/context/screen/screenContext'
 
-import { Spacing } from '@/consts/theme'
-
+import { AppLoader } from '@/components/AppLoader'
 import { EmptyList } from '@/components/EmptyList'
 import { NewTodo } from '@/components/NewTodo'
 import { Todo } from '@/components/Todo'
+import { AppError } from '@/components/AppError'
 
 const styles = StyleSheet.create({
   screen: {}
 })
 
 export const MainScreen: FC = () => {
-  const { todos, addTodo, removeTodo } = useContext(TodoContext)
+  const { addTodo, error, fetchTodos, loading, removeTodo, todos } = useContext(TodoContext)
   const { changeScreen } = useContext(ScreenContext)
 
   const [deviceWidth, setDeviceWidth] = useState(Dimensions.get('window').width - 2 * Spacing.PADDING_X)
+
+  const loadTodos = useCallback(async () => {
+    await fetchTodos()
+  }, [fetchTodos])
+
+  useEffect(() => {
+    void loadTodos()
+  }, [])
 
   useEffect(() => {
     const update = (): void => {
@@ -33,6 +43,14 @@ export const MainScreen: FC = () => {
       Dimensions.removeEventListener('change', update)
     }
   })
+
+  if (loading) {
+    return <AppLoader />
+  }
+
+  if (error) {
+    return <AppError error={error} onRefresh={loadTodos} />
+  }
 
   return (
     <View style={styles.screen}>
