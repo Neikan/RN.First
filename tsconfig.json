@@ -22,6 +22,8 @@
       "@/context": ["./context"],
       "@/screens/*": ["./screens/*"],
       "@/screens": ["./screens"],
+      "@/services": ["./services"],
+      "@/services/*": ["./services/*"],
       "@/types":  ["./types"],
     }
   },
